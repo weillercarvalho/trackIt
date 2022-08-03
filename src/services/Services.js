@@ -1,4 +1,4 @@
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 
 
 const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
@@ -67,3 +67,5 @@ function habitshistory() {
     const promisse = axios.post(`${BASE_URL}/habits/history/daily`, config);
     return promisse;
 }
+
+export {logins, singups, habitspost, habitsget, habitsgettoday, habitspostdone, habitspostundone, habitshistory};
