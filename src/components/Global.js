@@ -22,6 +22,7 @@ const Global = createGlobalStyle`
         width: 100vw;
         height: 100vh;
         font-family: 'Lexend Deca', sans-serif;
+        background-color: var(--color-background-habits-route);
     }
 
     @media (max-width: 375px) {
