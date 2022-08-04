@@ -6,19 +6,24 @@ import Login from './Login';
 import SingUp from './SingUp';
 import Today from './Today';
 import PrivatePage from '../services/PrivatePage';
+import { useState } from 'react';
 
 export default function App() {
+    const [drilling, setDrilling] = useState('');
+
     return (
         <>
             <Reset/>
             <Global/>
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<Login />}/>
-                    <Route path='/cadastro' element={<SingUp />}/>
-                    <Route path='/hoje' element={<PrivatePage><Today /></PrivatePage>}/>
-                </Routes>
-            </BrowserRouter>
+            <UserContext.Provider value={{drilling, setDrilling}}>
+                <BrowserRouter>
+                        <Routes>              
+                            <Route path='/' element={<Login />}/>
+                            <Route path='/cadastro' element={<SingUp />}/>
+                            <Route path='/hoje' element={<PrivatePage><Today /></PrivatePage>}/>
+                        </Routes>
+                </BrowserRouter>
+            </UserContext.Provider>
         </>
     )
 }

@@ -1,18 +1,21 @@
 import { logins } from '../services/Services';
-import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
 import { useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate, Link } from 'react-router-dom';
 import { Father } from './Father';
+import { useContext } from 'react';
+import UserContext from './Context';
 
 export default function Login() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const [information, setInformation] = useState([]);
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
-    
+   
+    const {drilling, setDrilling} = useContext(UserContext);
+
+
     function handleForm(e) {
         if (loading === false) {
             setLoading(true);
@@ -23,9 +26,12 @@ export default function Login() {
             }
             console.log(body)
             logins(body).then((res) => {
-                setInformation(res.data);
-                navigate('/hoje')
-                console.log(res)
+
+                console.log(res.data)
+
+                setDrilling(res.data.image);
+                console.log(drilling);
+                navigate('/hoje');
             });
             logins(body).catch(() => {
                 alert(`Falha ao logar`);

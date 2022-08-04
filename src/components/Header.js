@@ -1,28 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useContext } from 'react';
-import UserContext from '../components/Context';
+import UserContext from './Context';
 
-
-export default function PrivatePage({children}) {
-    const navigate = useNavigate();
-
-    const auth = JSON.parse(localStorage.getItem('trackit'));
-
-    if (auth) {
-        return (
-            <>
-                <Header/>
-                {children}
-            </>
-        )
-    }
-    else {
-        navigate('/');
-    }
-}
-
-    function Header() {
+export default function Header() {
 
     const [drilling,setDrilling] = useContext(UserContext);
     console.log(drilling)

@@ -5,13 +5,11 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { singups } from '../services/Services';
 
-
 export default function SingUp() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [name, setName] = useState('');
     const [photo,setPhoto] = useState('');
-    const [information, setInformation] = useState([]);
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
     
@@ -25,11 +23,11 @@ export default function SingUp() {
                 image: photo,
                 password: password,
             }
-
+            console.log(body)
             singups(body).then((res) => {
-                setInformation(res.data);
+                console.log(res)
                 navigate('/')
-                console.log(information)
+                
             });
             singups(body).catch(() => {
                 alert(`Falha ao logar`);
