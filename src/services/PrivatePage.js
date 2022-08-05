@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
+
 export default function PrivatePage({children}) {
     const navigate = useNavigate();
 
@@ -41,17 +42,18 @@ export default function PrivatePage({children}) {
 }
 
     function Footer() {
+        const navigate = useNavigate();
         return (
             <Footers>
-                <div>
-                    Habitos
-                </div>
-                <nav>
-                    <CircularProgressbar value={40} text={`Hoje`} background backgroundPadding={6} styles={buildStyles({backgroundColor: "#3e98c7",textColor: "#fff",pathColor: "#fff",trailColor: "transparent"})}/>
-                </nav>
-                <div>
-                    Historico
-                </div>
+                    <div onClick={() => navigate('/habitos')}>
+                        Habitos
+                    </div>
+                    <nav onClick={() => navigate('/hoje')}>
+                        <CircularProgressbar value={40} text={`Hoje`} background backgroundPadding={6} styles={buildStyles({backgroundColor: "#3e98c7",textColor: "#fff",pathColor: "#fff",trailColor: "transparent"})}/>
+                    </nav>
+                    <div onClick={() => navigate('/historico')}>
+                        Historico
+                    </div>
             </Footers>
         )
     }
@@ -99,11 +101,19 @@ const Footers = styled.footer`
         font-family: 'Lexend Deca', sans-serif;
         font-weight: 400;
         margin: 0px 30px 0px 30px;
+        &:hover{
+            cursor:pointer;
+        }
     }
 
     nav {
         width: 91px;
         height: 91px;
         margin-bottom: 30px;
+        border-radius:50%;
+        &:hover{
+            cursor:pointer;
+        }
+      
     }
 `

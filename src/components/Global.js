@@ -17,6 +17,8 @@ const Global = createGlobalStyle`
         --color-porcent-text: #8FC549;
         --color-placeholder: #DBDBDB;
         --color-placeholder-border: #D5D5D5;
+        --color-letter-gray: #BABABA;
+        --color-letter-gray-black: #666666;
     }
 
     body {
