@@ -6,6 +6,7 @@ const Global = createGlobalStyle`
         --color-background-login-route: #FFFFFF;
         --color-background-habits-route: #F2F2F2;
         --color-button-login: #52B6FF;
+        --color-button-footer: #52B6FF;
         --color-fixed-top: #126BA5;
         --color-fixed-botton: #FFFFFF;
         --color-button-letter: #FFFFFF;

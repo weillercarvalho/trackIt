@@ -1,9 +1,12 @@
 import { Father } from './Father'
 import logo from '../assets/images/logo.png';
 import { ThreeDots } from 'react-loader-spinner';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { singups } from '../services/Services';
+import UserContext from './Context';
+import { useContext } from 'react';
+
 
 export default function SingUp() {
     const [email,setEmail] = useState('');
@@ -11,8 +14,17 @@ export default function SingUp() {
     const [name, setName] = useState('');
     const [photo,setPhoto] = useState('');
     const [loading,setLoading] = useState(false);
+    const {tokens,setTokens} = useContext(UserContext);
     const navigate = useNavigate();
     
+
+    useEffect(() => {
+        if (tokens) {
+            setTokens(JSON.parse(localStorage.getItem('trackit')));
+            navigate('/hoje')
+        }
+    }, []); 
+
     function handleForm(e) {
         if (loading === false) {
             setLoading(true);

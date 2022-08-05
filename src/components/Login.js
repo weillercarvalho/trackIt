@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Father } from './Father';
 import { useContext } from 'react';
 import UserContext from './Context';
+import { useEffect } from 'react';
 
 export default function Login() {
     const [email,setEmail] = useState('');
@@ -13,8 +14,14 @@ export default function Login() {
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
    
-    const {drilling, setDrilling} = useContext(UserContext);
+    const {tokens,setTokens} = useContext(UserContext);
 
+    useEffect(() => {
+        if (tokens) {
+            setTokens(JSON.parse(localStorage.getItem('trackit')));
+            navigate('/hoje')
+        }
+    }, []); 
 
     function handleForm(e) {
         if (loading === false) {
@@ -24,18 +31,15 @@ export default function Login() {
                 email: email,
                 password: password
             }
-            console.log(body)
+
             logins(body).then((res) => {
-
-                console.log(res.data)
-
-                setDrilling(res.data.image);
-                console.log(drilling);
+                setTokens(res.data)
+                localStorage.setItem('trackit',JSON.stringify({token:res.data.token,image:res.data.image}))
                 navigate('/hoje');
             });
             logins(body).catch(() => {
                 alert(`Falha ao logar`);
-                setLoading(false)
+                setLoading(false);
             })  
         }
     }
