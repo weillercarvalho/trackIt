@@ -38,7 +38,7 @@ function habitsget() {
 
 function habitsdelete(iDhabit) {
     const config = createHeaders();
-    const promisse = axios.delete(`${BASE_URL}/${iDhabit}`, config);
+    const promisse = axios.delete(`${BASE_URL}/habits/${iDhabit}`, config);
     return promisse;
 }
 
@@ -50,13 +50,15 @@ function habitsgettoday() {
 
 function habitspostdone(iDhabit) {
     const config = createHeaders();
-    const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/check`, config);
+    const body = {};
+    const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/check`, body, config);
     return promisse;
 }
 
 function habitspostundone(iDhabit) {
     const config = createHeaders();
-    const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/uncheck`, config);
+    const body = {};
+    const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/uncheck`, body, config);
     return promisse;
 }
 

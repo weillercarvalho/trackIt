@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-
-
+import UserContext from '../components/Context';
+import { useContext } from 'react';
 
 export default function PrivatePage({children}) {
     const navigate = useNavigate();
@@ -43,13 +43,14 @@ export default function PrivatePage({children}) {
 
     function Footer() {
         const navigate = useNavigate();
+        const {prog} = useContext(UserContext);
         return (
             <Footers>
                     <div onClick={() => navigate('/habitos')}>
                         Habitos
                     </div>
                     <nav onClick={() => navigate('/hoje')}>
-                        <CircularProgressbar value={40} text={`Hoje`} background backgroundPadding={6} styles={buildStyles({backgroundColor: "#3e98c7",textColor: "#fff",pathColor: "#fff",trailColor: "transparent"})}/>
+                        <CircularProgressbar value={prog} text={`Hoje`} background backgroundPadding={6} styles={buildStyles({backgroundColor: "#3e98c7",textColor: "#fff",pathColor: "#fff",trailColor: "transparent"})}/>
                     </nav>
                     <div onClick={() => navigate('/historico')}>
                         Historico
@@ -67,6 +68,7 @@ const Headers = styled.nav`
     position: fixed;
     top: 0px;
     background-color: var(--color-fixed-top);
+    z-index:1;
 
     div {
         font-family: 'Playball', cursive;
@@ -94,6 +96,7 @@ const Footers = styled.footer`
     bottom: 0px;
     background-color: var(--color-fixed-botton);
     width: 100%;
+    z-index:1;
 
     div {
         color: var(--color-button-footer);

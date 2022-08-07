@@ -66,11 +66,17 @@ export default function Habits() {
         
     },[count])
 
+    
+
     function deleted(bolinha) {
-        const conf = window.confirm('Quieres deletar un habito mi hermano?');
+        const conf = window.confirm('Deseja deletar o box?');
         if (conf) {
-            habitsdelete(bolinha).then(() => {
+            habitsdelete(bolinha)
+            .then(() => {
                 setCount(!count);
+            })
+            .catch(() => {
+                setCount(!count)
             })
         }
     }
@@ -167,7 +173,7 @@ export default function Habits() {
     )
 }
 
-function GettingHabits({name, id, dayz}) {
+function GettingHabits({name, id, dayz, deleted}) {
     const {habits, setHabits} = useContext(UserContext);
 
     const tested = [        
@@ -194,7 +200,7 @@ function GettingHabits({name, id, dayz}) {
     return (
         <Gets>
             <h1>{name}</h1>
-            <img src={trash}/>
+            <img onClick={() => deleted(id)} src={trash}/>
             <main>
                 {returned.map(value => (<Weekend isAvv={value.isAvailable}>{value.day}</Weekend>))}
             </main>
@@ -383,7 +389,7 @@ const Gets = styled.div`
     width: 95%;
     background-color: var(--color-button-letter);
     position: relative;
-    z-index: -1;
+
 
     h1 {
         font-family: 'Lexend Deca', sans-serif !important;
@@ -391,6 +397,7 @@ const Gets = styled.div`
         font-weight: 400 !important;
         color: var(--color-letter-text) !important;
         margin: 13px 0px 0px 15px !important;
+
     }
     main {
         display:flex;
@@ -401,6 +408,9 @@ const Gets = styled.div`
         position: absolute;
         top: 11px;
         right: 10px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
 `

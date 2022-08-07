@@ -15,8 +15,8 @@ export default function App() {
     const [tokens,setTokens] = useState('');
     const [hab,setHab] = useState([]);
     const [clicked, setClicked] = useState(false);
-    const [count, setCount] = useState([]);
     const [habt, setHabt] = useState('');
+    const [today,setToday] = useState([])
     const [prog,setProg] = useState(0);
     const [habits, setHabits] = useState([]);
     const [days,setDays] = useState([        
@@ -38,7 +38,7 @@ export default function App() {
         <>
             <Reset/>
             <Global/>
-            <UserContext.Provider value={{drilling, setDrilling, tokens, setTokens, hab, setHab, clicked, setClicked, habt, setHabt, prog, setProg, days, setDays, habits, setHabits}}>
+            <UserContext.Provider value={{drilling, setDrilling, tokens, setTokens, hab, setHab, clicked, setClicked, habt, setHabt, prog, setProg, days, setDays, habits, setHabits, today, setToday}}>
                 <BrowserRouter>
                         <Routes>              
                             <Route path='/' element={<Login />}/>
