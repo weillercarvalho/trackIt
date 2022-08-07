@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import UserContext from './Context';
 import { useContext } from 'react';
-import { habitsget, habitspost } from '../services/Services';
+import { habitsget, habitspost, habitsdelete } from '../services/Services';
 import { useState, useEffect } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
+import trash from '../assets/images/Group.png'
 
 
 export default function Habits() {
-    const {hab, setHab, clicked, setClicked, habt, setHabt, days, setDays} = useContext(UserContext);
-    const [count, setCount] = useState([]);
-    const [toggle, setToggle] = useState(false)
+    const {hab, setHab, clicked, setClicked, habt, setHabt, days, setDays, habits, setHabits} = useContext(UserContext);
+    const [count, setCount] = useState(false);
+    const [toggle, setToggle] = useState(false);
+   
 
     function handleForm(e) {
         e.preventDefault();
@@ -40,8 +42,6 @@ export default function Habits() {
         
     }
 
-
-
     function exausted(seatId) {
         const newDays = days.map(value => {
             if (value.number === seatId) {
@@ -55,7 +55,25 @@ export default function Habits() {
         setDays(newDays)
     }
 
+    useEffect(() => {
+        habitsget()
+        .catch((res) => {
+            console.log(res)
+        })
+        .then((res) => {
+            setHabits(res.data)
+        })
+        
+    },[count])
 
+    function deleted(bolinha) {
+        const conf = window.confirm('Quieres deletar un habito mi hermano?');
+        if (conf) {
+            habitsdelete(bolinha).then(() => {
+                setCount(!count);
+            })
+        }
+    }
 
 
     return (
@@ -81,7 +99,8 @@ export default function Habits() {
                 </Begins>) 
                 : 
                 (
-                    <Begins >
+                    habits.length === 0 ? 
+                    (<Begins >
                         <nav>
                             Meus hábitos
                             <div>+</div>
@@ -97,11 +116,30 @@ export default function Habits() {
                             </form>
                         </main>
                         <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
-                    </Begins>
+                    </Begins>)
+                    : 
+                    (<Begins >
+                        <nav>
+                            Meus hábitos
+                            <div>+</div>
+                        </nav>
+                        <main>
+                            <form onSubmit={handleForm}>
+                                <input type='text' id='text' name='text' placeholder='nome do hábito' value={habt} onChange={(e) => setHabt(e.target.value)}></input>
+                                <aside>
+                                    {days.map((value,index) => (<Tired key={index} number={value.number} day={value.day} isAvailable={value.isAvailable} exausted={exausted}/>))}
+                                </aside>
+                                <h1 onClick={() => setClicked(!clicked)}>Cancelar</h1>
+                                <button>Salvar</button>
+                            </form>
+                        </main>
+                    </Begins>)
                 )}
             </>)
             :
             (
+                habits.length === 0 ? 
+                (
                 <Begins>
                     <nav>
                         Meus hábitos
@@ -109,8 +147,58 @@ export default function Habits() {
                     </nav>
                     <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
                 </Begins>
+                ) 
+                : 
+                (
+                <>
+                    <Begins>
+                        <nav>
+                            Meus hábitos
+                            <div onClick={() => setClicked(!clicked)}>+</div>
+                        </nav>
+                    </Begins>
+                    <Uncle>
+                        {habits.map((value,index) => (<GettingHabits key={index} id={value.id} dayz={value.days} name={value.name} deleted={deleted}/>))}
+                    </Uncle>    
+                </>
+                )
             )}  
         </>
+    )
+}
+
+function GettingHabits({name, id, dayz}) {
+    const {habits, setHabits} = useContext(UserContext);
+
+    const tested = [        
+        {day: 'D', number: 0, isAvailable: false}, 
+        {day: 'S', number: 1, isAvailable: false}, 
+        {day: 'T', number: 2, isAvailable: false}, 
+        {day: 'Q', number: 3, isAvailable: false}, 
+        {day: 'Q', number: 4, isAvailable: false}, 
+        {day: 'S', number: 5, isAvailable: false}, 
+        {day: 'S', number: 6, isAvailable: false}, 
+        ]
+
+    const suffering = tested;
+
+    const returned = suffering.map(value => {
+        if (dayz.includes(value.number)) {
+            return {
+                ...value, isAvailable: true,
+            }
+        }
+        return value;
+    })
+
+    return (
+        <Gets>
+            <h1>{name}</h1>
+            <img src={trash}/>
+            <main>
+                {returned.map(value => (<Weekend isAvv={value.isAvailable}>{value.day}</Weekend>))}
+            </main>
+        </Gets>
     )
 }
 
@@ -288,4 +376,54 @@ const ThreeDot = styled.div`
         cursor:pointer;
     }
 
+`
+const Gets = styled.div`
+    margin: 20px 0px 20px 0px;
+    height: 91px;
+    width: 95%;
+    background-color: var(--color-button-letter);
+    position: relative;
+    z-index: -1;
+
+    h1 {
+        font-family: 'Lexend Deca', sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 400 !important;
+        color: var(--color-letter-text) !important;
+        margin: 13px 0px 0px 15px !important;
+    }
+    main {
+        display:flex;
+        margin-left: 17px;
+    }
+
+    img {
+        position: absolute;
+        top: 11px;
+        right: 10px;
+    }
+
+`
+const Uncle = styled.div`
+    display:flex;
+    flex-direction:column;
+    margin: 0px auto 91px 17px;
+`
+
+const Weekend = styled.section`
+    display: flex;
+    margin-top: 8px;
+    width: 30px;
+    height: 30px;
+    background-color: ${(props) => (props.isAvv ? 'var(--color-placeholder)': 'var(--color-button-letter)')};
+    color: ${(props) => (props.isAvv ? 'var(--color-button-letter)': 'var(--color-placeholder)')};
+    border: 1px solid var(--color-placeholder-border);
+    border-radius: 5px;
+    margin-right: 4px;
+    display:flex;
+    justify-content:center;
+    align-items:center; 
+    &:hover{
+        cursor: pointer;
+    }
 `

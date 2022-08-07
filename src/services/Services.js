@@ -36,13 +36,11 @@ function habitsget() {
 }
 
 
-// PESQUISAR SOBRE COMO EXECUTAR DELETE AXIOS.
-
-// function habitsdelete(iDhabit) {
-//     const config = createHeaders();
-//     const promisse = axios.delete(`${BASE_URL}/${iDhabit}`, config);
-//     return promisse;
-// }
+function habitsdelete(iDhabit) {
+    const config = createHeaders();
+    const promisse = axios.delete(`${BASE_URL}/${iDhabit}`, config);
+    return promisse;
+}
 
 function habitsgettoday() {
     const config = createHeaders();
@@ -68,4 +66,4 @@ function habitshistory() {
     return promisse;
 }
 
-export {logins, singups, habitspost, habitsget, habitsgettoday, habitspostdone, habitspostundone, habitshistory};
+export {logins, singups, habitspost, habitsget, habitsgettoday, habitspostdone, habitspostundone, habitshistory, habitsdelete};
