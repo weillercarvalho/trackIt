@@ -32,12 +32,14 @@ export default function Login() {
                 password: password
             }
 
-            logins(body).then((res) => {
+            logins(body)
+            .then((res) => {
                 setTokens(res.data)
-                localStorage.setItem('trackit',JSON.stringify({token:res.data.token,image:res.data.image}))
+                localStorage.setItem('trackit',JSON.stringify({token:res.data.token,image:res.data.image}));
+
                 navigate('/hoje');
-            });
-            logins(body).catch(() => {
+            })
+            .catch(() => {
                 alert(`Falha ao logar`);
                 setLoading(false);
             })  

@@ -12,16 +12,32 @@ import History from './History';
 
 export default function App() {
     const [drilling, setDrilling] = useState('');
-    const [tokens,setTokens] = useState('')
-    const auth = JSON.parse(localStorage.getItem('trackit'))
+    const [tokens,setTokens] = useState('');
+    const [hab,setHab] = useState([]);
+    const [clicked, setClicked] = useState(false);
+    const [count, setCount] = useState([]);
+    const [habt, setHabt] = useState('');
+    const [prog,setProg] = useState(0);
+    const [days,setDays] = useState([        
+        {day: 'D', number: 0, isAvailable: false}, 
+        {day: 'S', number: 1, isAvailable: false}, 
+        {day: 'T', number: 2, isAvailable: false}, 
+        {day: 'Q', number: 3, isAvailable: false}, 
+        {day: 'Q', number: 4, isAvailable: false}, 
+        {day: 'S', number: 5, isAvailable: false}, 
+        {day: 'S', number: 6, isAvailable: false}, 
+        ])
+    
+
+    const auth = JSON.parse(localStorage.getItem('trackit'));
     if (auth && tokens === '') {
-        setTokens(JSON.parse(localStorage.getItem('trackit')))
+        setTokens(JSON.parse(localStorage.getItem('trackit')));
     }
     return (
         <>
             <Reset/>
             <Global/>
-            <UserContext.Provider value={{drilling, setDrilling, tokens, setTokens}}>
+            <UserContext.Provider value={{drilling, setDrilling, tokens, setTokens, hab, setHab, clicked, setClicked, habt, setHabt, prog, setProg, days, setDays}}>
                 <BrowserRouter>
                         <Routes>              
                             <Route path='/' element={<Login />}/>

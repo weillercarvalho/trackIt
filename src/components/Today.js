@@ -3,13 +3,23 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
 
+
 export default function Today() {
     const days = dayjs().locale('pt-br').format('dddd').replaceAll('-feira','');
-    const daysatt = days.replace(days[0],days[0].toUpperCase())
-    const date = dayjs().format('DD/MM')
+    const daysatt = days.replace(days[0],days[0].toUpperCase());
+    const date = dayjs().format('DD/MM');
     return (
-            <Begin>
-               <div>{daysatt}, {date}</div>
+        <Begin>
+            <div>{daysatt}, {date}</div>
+            <Todays />
+        </Begin>
+    )
+}
+
+function Todays() {
+
+    return (
+            <>
                <nav>Nenhum hábito concluído ainda</nav> 
                <main>
                 <section>
@@ -32,7 +42,7 @@ export default function Today() {
                     <p>Seu recorde: 5 dias</p>
                 </section>
                </main>
-            </Begin>
+            </>   
     )
 }
 

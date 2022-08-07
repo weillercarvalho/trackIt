@@ -7,7 +7,7 @@ const Father = styled.main`
     height:100vh;
     img {
         width: 180px;
-        margin: 68px 97px 32px 97px;
+        margin: auto;
     }
     form {
         display:flex;
@@ -82,6 +82,13 @@ const Father = styled.main`
         color: var(--color-button-login);
         font-style: normal;
         text-decoration-line: underline;
+    }
+    @media (max-width: 375px) {
+        img {
+        width: 180px;
+        margin: 68px 97px 32px 97px;
+    }
+
     }
 `
 
