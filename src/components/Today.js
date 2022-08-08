@@ -48,6 +48,7 @@ export default function Today() {
             habitspostundone(todayId)
             .catch((res) => {
                 setTestundone(res);
+                console.log(res)
             })
             .then(() => {
                 setScreen(!screen);
@@ -56,6 +57,7 @@ export default function Today() {
             habitspostdone(todayId)
             .catch((res) => {
                 setTestdone(res);
+                console.log(res)
             })
             .then(() => {
                 setScreen(!screen);

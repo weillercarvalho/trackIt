@@ -50,14 +50,14 @@ function habitsgettoday() {
 
 function habitspostdone(iDhabit) {
     const config = createHeaders();
-    const body = {};
+    const body = {teste:'Weiller Carvalho'};
     const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/check`, body, config);
     return promisse;
 }
 
 function habitspostundone(iDhabit) {
     const config = createHeaders();
-    const body = {};
+    const body = {teste:'Weiller Carvalho'};
     const promisse = axios.post(`${BASE_URL}/habits/${iDhabit}/uncheck`, body, config);
     return promisse;
 }
