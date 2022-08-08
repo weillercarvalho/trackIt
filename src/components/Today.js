@@ -40,7 +40,7 @@ export default function Today() {
         })
     },[prog, screen])
 
-
+    console.log(today)
     
     function check(todayId) {
         const values = today.filter(value => todayId === value.id)[0];

@@ -23,8 +23,7 @@ export default function Habits() {
             name: habt,
             days: sotired,
         }
-        console.log(body)
-
+      
         habitspost(body)
         .catch((res) => {
             setToggle(false);
@@ -38,6 +37,9 @@ export default function Habits() {
                 }
             });
             setToggle(false);
+            setHabt('');
+            setCount(!count);
+            setClicked(!clicked);
         })
         
     }
