@@ -40,6 +40,7 @@ export default function Habits() {
             setHabt('');
             setCount(!count);
             setClicked(!clicked);
+            setDays(reborn);
         })
         
     }
