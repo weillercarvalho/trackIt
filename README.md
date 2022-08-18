@@ -37,16 +37,14 @@ This is an web application with which lots of people can manage and make daily t
 ```bash
 npm i
 ```
-5. Run the front-end with
+3. Run the front-end with
 ```bash
 npm start
 ```
-6. You can optionally build the project running
+4. You can optionally build the project running
 ```bash
 npm run build
 ```
-7. Finally access the localhost or open the SaaS Vercel uploaded version if you don't/cant't open your localhost:
-
-  https://trackit-theproject.vercel.app/
+5. For better results use the viewport (375px width), its a responsive app.
 
 
