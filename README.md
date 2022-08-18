@@ -4,6 +4,13 @@ A complete habit tracking application. Entitled to register, login.
 
 ![Captura de tela de 2022-08-08 12-22-51](https://user-images.githubusercontent.com/99501431/184571350-aee8c601-1565-4dab-8d27-a41509c131bd.png)
 
+ <p align="center">
+   <br />
+   <br />
+   <a href='https://trackit-theproject.vercel.app/' target='_blank' noreferrer>View Demo</a>
+   <br />
+ </p>
+
 ## About
 
 This is an web application with which lots of people can manage and make daily tracking, like set some goals as example: read books, run everyday some hours etc. Below are the implemented features:
